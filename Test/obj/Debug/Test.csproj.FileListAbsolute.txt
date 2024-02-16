@@ -1,0 +1,7 @@
+D:\PROJECTS\c#\TimeChecker\Test\bin\Debug\Test.exe.config
+D:\PROJECTS\c#\TimeChecker\Test\bin\Debug\Test.exe
+D:\PROJECTS\c#\TimeChecker\Test\bin\Debug\Test.pdb
+D:\PROJECTS\c#\TimeChecker\Test\obj\Debug\Test.csproj.AssemblyReference.cache
+D:\PROJECTS\c#\TimeChecker\Test\obj\Debug\Test.csproj.CoreCompileInputs.cache
+D:\PROJECTS\c#\TimeChecker\Test\obj\Debug\Test.exe
+D:\PROJECTS\c#\TimeChecker\Test\obj\Debug\Test.pdb

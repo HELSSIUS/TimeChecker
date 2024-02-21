@@ -25,17 +25,24 @@ namespace TimeChecker.Utils
         private TimeConfig()
         {
             initApp();
+            
             if (currentDay.DayOfYear < DateTime.Now.DayOfYear)
             {
                 currentDay = DateTime.Now;
                 LeftDayTime = MaxDayTime;
                 LeftSessionTime = MaxSessionTime;
-            }
+            } else
+            {   
+                if (LeftDayTime < TimeSpan.FromMinutes(1))
+                    LeftDayTime = TimeSpan.FromMinutes(1);
+                if (LeftSessionTime < TimeSpan.FromMinutes(1))
+                    LeftSessionTime = TimeSpan.FromMinutes(1);
 
-            if (FinishSessionTime + BreakTime > DateTime.Now)
-                ActionInBreakTime();
-            else
-                LeftSessionTime = LeftDayTime < MaxSessionTime ? LeftDayTime : MaxSessionTime;
+                if (FinishSessionTime + BreakTime > DateTime.Now)
+                    ActionInBreakTime();
+                else
+                    LeftSessionTime = LeftDayTime < MaxSessionTime ? LeftDayTime : MaxSessionTime;
+            }
 
             StartSessionTime = DateTime.Now;
 
@@ -96,12 +103,10 @@ namespace TimeChecker.Utils
         }
 
         protected void ActionInBreakTime()
-        {
+        {   
             if (LeftSessionTime < TimeSpan.FromMinutes(5)) 
             {
                 TimeSpan restBreakTime = DateTime.Now - (FinishSessionTime + BreakTime);
-                if (LeftSessionTime < TimeSpan.FromMinutes(1))
-                    LeftSessionTime = TimeSpan.FromMinutes(1);
             }
         }
 

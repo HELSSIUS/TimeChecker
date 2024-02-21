@@ -1,17 +1,7 @@
-﻿using Microsoft.Toolkit.Uwp.Notifications;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Windows.UI.Notifications;
-using Windows.UI.Xaml.Documents;
 
 namespace TimeChecker.Utils
 {
@@ -109,18 +99,20 @@ namespace TimeChecker.Utils
             return null;
         }
 
-        public static void addToAutoRun()
+        public static void addToAutoRun(string key, string executablePath)
         {
+            executablePath = executablePath.Replace("/", "\\");
+
             string runPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
             using (RegistryKey runKey = Registry.LocalMachine.OpenSubKey(runPath, true))
             {
-                if (runKey.GetValue(Config.appName) != null)
+                if (runKey.GetValue(key) != null)
                 {
-                    string appPath = (string)runKey.GetValue(Config.appName);
-                    if (appPath != Application.ExecutablePath)
-                        runKey.SetValue(Config.appName, Application.ExecutablePath);
+                    string appPath = (string)runKey.GetValue(key);
+                    if (appPath != executablePath)
+                        runKey.SetValue(key, executablePath);
                 } else
-                    runKey.SetValue(Config.appName, Application.ExecutablePath);
+                    runKey.SetValue(key, executablePath);
             }
         }
     }
